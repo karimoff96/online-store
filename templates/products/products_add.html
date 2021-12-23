@@ -1,0 +1,290 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>BRILLIANT Online Shop</title>
+    <!-- Bootstrap Styles-->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet"/>
+
+    <link href="{% static 'assets/css/select2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/checkbox3.min.css' %}" rel="stylesheet">
+    <!-- Custom Styles-->
+    <link href="{% static 'assets/css/custom-styles.css' %}" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index"><strong><i class="icon fa fa-plane"></i> BRILLIANT</strong></a>
+            <div id="sideNav" href="">
+                <i class="fa fa-bars icon"></i>
+            </div>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> Charts<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="chart.html">Charts JS</a>
+                        </li>
+                        <li>
+                            <a href="morris-chart.html">Morris Chart</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                </li>
+
+                <li>
+                    <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+                </li>
+                <li>
+                    <a href="form.html" class="active-menu"><i class="fa fa-edit"></i> Forms </a>
+                </li>
+
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Second Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                Form Elements <small>Best form elements.</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Forms</a></li>
+                <li class="active">Product Add</li>
+            </ol>
+
+        </div>
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>Examples of standard form controls. such as input, textarea, select, checkboxes and
+                                radios ,
+                                static control, etc.</p>
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <a href='/category_add' class="col-2 btn btn-primary mb-2">Category add</a>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Category</div>
+                                    {% for c in categories %}
+                                        <div>
+                                            <select class="selectbox" name="category">
+                                                <optgroup label="Category">
+                                                    <option value="{{ c.id }}">{{ c.name }}</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+
+                                    {% endfor %}
+                                </div>
+                                <a href='/subcat_add' class="col-2 btn btn-primary mb-2">SubCategory add</a>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">SubCategory</div>
+                                    {% for c in subcat %}
+                                        <div>
+                                            <select class="selectbox" name="subcategory">
+                                                <optgroup label="SubCategory">
+                                                    <option value="{{ c.id }}">{{ c.name }}</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Name</div>
+                                    <div>
+                                        <input type="text" class="form-control" name='name'
+                                               placeholder="Text input">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Code</div>
+                                    <div>
+                                        <input type="text" class="form-control" name='code'
+                                               placeholder="Text input">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Model</div>
+                                    <div>
+                                        <input type="text" class="form-control" name='model'
+                                               placeholder="Text input">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="sub-title">Date</div>
+                                    <div>
+                                        <input type="date" class="form-control" name='cr_on'
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Description</div>
+                                    <div>
+                                        <textarea class="form-control" name='description' rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Type</div>
+                                    <div>
+                                        <input type="text" class="form-control" name='type'
+                                               placeholder="Text input">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div>
+                                        <div class="sub-title">Image input</div>
+                                        <div class="form-group ">
+                                            <input type="file" id="exampleInputFile" name="image">
+                                            <p class="help-block">Choose an image of item</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Price</div>
+                                    <div>
+                                        <input type="number" class="form-control" name='price'
+                                               placeholder="Text input">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="sub-title">Active</div>
+                                    <div>
+                                        <select class="selectbox" name="active">
+                                            <optgroup label="Active">
+                                                <option value="{{ True }}">{{ "Active" }}</option>
+                                                <option value="{{ False }}">{{ "Inactive" }}</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <div class="card-title">
+                                            <div class="title">Submit information</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <footer><p> Online store <a href="http://t.me/dkarimoff96">Created by</a></p></footer>
+                </footer>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+<!-- Bootstrap Js -->
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<!-- Metis Menu Js -->
+<script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'assets/js/select2.full.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".selectbox").select2();
+    });
+</script>
+<!-- Custom Js -->
+<script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+
+
+</body>
+</html>

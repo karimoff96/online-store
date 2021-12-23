@@ -1,0 +1,14 @@
+<h1>ALL PRODUCTS</h1>
+{% for product in object_list %}
+    <ul>
+        <li>Code: {{ product.code }}</li>
+        <li>Name: {{ product.name }}</li>
+        <li>Model: {{ product.model }}</li>
+        <li>Date: {{ product.datetime }}</li>
+        <li>Description: {{ product.description }}</li>
+        <li>Type: {{ product.type }}</li>
+        <li>Image: {{ product.image }}</li>
+        <li>Price: {{ product.price }}</li>
+        <li>Active: {{ product.active }}</li>
+    </ul>
+{% endfor %}
