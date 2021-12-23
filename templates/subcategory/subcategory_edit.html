@@ -134,11 +134,9 @@
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Forms</a></li>
-                <li class="active">Product Add</li>
+                <li class="active">SubCategory Add</li>
             </ol>
-
         </div>
-
         <div id="page-inner">
             <div class="row">
                 <div class="col-xs-12">
@@ -149,6 +147,7 @@
                                 static control, etc.</p>
                             <form method="POST">
                                 {% csrf_token %}
+                                <a href='/category_add' class="col-2 btn btn-primary mb-2">Category add</a>
                                 <div class="col-xs-12">
                                     <div class="sub-title">Category</div>
                                     {% for c in categories %}
@@ -162,72 +161,26 @@
                                     {% endfor %}
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="sub-title">SubCategory</div>
-                                    {% for c in subcat %}
-                                        <div>
-                                            <select class="selectbox" name="subcategory">
-                                                <optgroup label="SubCategory">
-                                                    <option value="{{ c.id }}">{{ c.name }}</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="col-xs-12">
                                     <div class="sub-title">Name</div>
                                     <div>
-                                        <input type="text" class="form-control" value= "{{ product.name }}" name='name'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Code</div>
-                                    <div>
-                                        <input type="text" class="form-control" value= "{{ product.code }}" name='code'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Model</div>
-                                    <div>
-                                        <input type="text" class="form-control" value= "{{ product.model }}" name='model'
+                                        <input type="text" class="form-control" value= "{{ subcate.name }}" name='name'
                                                placeholder="Text input">
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
                                     <div class="sub-title">Date</div>
                                     <div>
-                                        <input type="date" class="form-control" value= "{{ product.datetime }}" name='cr_on'
+                                        <input type="date" class="form-control" value= "{{ subcate.cr_on }}" name='cr_on'
                                                placeholder="">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Description</div>
-                                    <div>
-                                        <textarea class="form-control" name='description' {{ product.description}} rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Type</div>
-                                    <div>
-                                        <input type="text" class="form-control" value= "{{ product.type }}" name='type'
-                                               placeholder="Text input">
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div>
                                         <div class="sub-title">Image input</div>
                                         <div class="form-group ">
-                                            <input type="file" id="exampleInputFile" value= "{{ product.image }}" name="image">
+                                            <input type="file" id="exampleInputFile" value= "{{ subcate.image }}" name="image">
                                             <p class="help-block">Choose an image of item</p>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Price</div>
-                                    <div>
-                                        <input type="number" class="form-control" value= "{{ product.price }}" name='price'
-                                               placeholder="Text input">
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
@@ -253,6 +206,7 @@
                         </div>
                     </div>
                 </div>
+
                 <footer><p> Online store <a href="http://t.me/dkarimoff96">Created by</a></p></footer>
                 </footer>
             </div>

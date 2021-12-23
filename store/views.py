@@ -70,7 +70,26 @@ def product_add(request):
 def product_edit(request, id):
     products = Product.objects.all()
     product = Product.objects.get(id=id)
+    if request.method == 'POST':
+        a = request.POST
+        product.name = a['name']
+        product.code = a['code']
+        product.model = a['model']
+        product.datetime = a['cr_on']
+        product.description = a['description']
+        product.type = a['type']
+        product.image = a['image']
+        product.price = a['price']
+        product.active = a['active']
+        product.save()
+        return redirect('/products')
     return render(request, "products/products_edit.html", {"products": products, "product": product})
+
+
+def product_delete(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return redirect('/products')
 
 
 def subcategory(request):
@@ -79,4 +98,36 @@ def subcategory(request):
 
 
 def subcat_add(request):
-    return render(request, 'subcategory/subcategory_add.html')
+    category = Category.objects.all()
+    if request.method == 'POST':
+        a = request.POST
+        subcat = SubCategory.objects.create(
+            name=a['name'],
+            cr_on=a['cr_on'],
+            image=a['image'],
+            active=a['active']
+        )
+        subcat.save()
+        return redirect('/subcat')
+    return render(request, 'subcategory/subcategory_add.html', {'category': category})
+
+
+def subcat_edit(request, id):
+    subcats = SubCategory.objects.all()
+    subcate = SubCategory.objects.get(id=id)
+    if request.method == 'POST':
+        a = request.POST
+        subcate.name = a['name']
+        subcate.cr_on = a['cr_on']
+        subcate.image = a['image']
+        subcate.active = a['active']
+        subcate.save()
+        return redirect('/subcat')
+    return render(request, "subcategory/subcategory_edit.html", {"subcats": subcats, "subcate": subcate})
+
+
+def subcat_delete(request, id):
+    subcat = SubCategory.objects.get(id=id)
+    subcat.delete()
+    return redirect('/subcat')
+

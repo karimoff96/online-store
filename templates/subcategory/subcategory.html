@@ -168,7 +168,6 @@ Website: http://www.webthemez.com/
                                         <th>Name</th>
                                         <th>Image</th>
                                         <th>Created</th>
-                                        <th>Updated</th>
                                         <th>Active</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -182,11 +181,10 @@ Website: http://www.webthemez.com/
                                             <td>{{ c.name }}</td>
                                             <td><img src="{{ c.image }}"></td>
                                             <td>{{ c.cr_on }}</td>
-                                            <td>{{ c.cr_up }}</td>
                                             <td>{{ c.active }}</td>
-                                            <td><a href="/category_edit/{{ c.id }}" class="btn btn-info">Edit</a>
+                                            <td><a href="/subcat_edit/{{ c.id }}" class="btn btn-info">Edit</a>
                                             </td>
-                                            <td><a href="/category_delete/{{ c.id }}" class="btn btn-danger">Delete</a>
+                                            <td><a href="/subcat_delete/{{ c.id }}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     {% endfor %}
