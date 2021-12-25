@@ -4,10 +4,11 @@ from .serializerviews import *
 
 urlpatterns = [
     path('', log_in, name='login'),
-    path('list', ProductListView.as_view(), name='home'),
     path('index/', index, name='index'),
     path('categories/', categories, name='categories'),
     path('category_add/', category_add, name='category_add'),
+    path('category_edit/<int:id>', category_edit, name='category_edit'),
+    path('category_delete/<int:id>', category_delete, name='category_delete'),
     path('products/', products, name='products'),
     path('product_add/', product_add, name='product_add'),
     path('product_edit/<int:id>', product_edit, name='product_edit'),
