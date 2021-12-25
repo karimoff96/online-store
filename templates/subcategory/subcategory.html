@@ -179,7 +179,12 @@ Website: http://www.webthemez.com/
                                             <th scope="row">{{ c.id }}</th>
                                             <td>{{ c.category }}</td>
                                             <td>{{ c.name }}</td>
-                                            <td><img src="{{ c.image }}"></td>
+                                            <td>
+                                                <img src="/media/{{ c.image }}"
+                                                     style="object-fit:scale-down;
+                                                    width:80px;
+                                                    height:50px"/>
+                                            </td>
                                             <td>{{ c.cr_on }}</td>
                                             <td>{{ c.active }}</td>
                                             <td><a href="/subcat_edit/{{ c.id }}" class="btn btn-info">Edit</a>

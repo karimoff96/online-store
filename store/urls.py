@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from .serializerviews import *
 
 urlpatterns = [
     path('', log_in, name='login'),
@@ -15,4 +16,11 @@ urlpatterns = [
     path('subcat_add/', subcat_add, name='subcat_add'),
     path('subcat_edit/<int:id>', subcat_edit, name='subcat_edit'),
     path('subcat_delete/<int:id>', subcat_delete, name='subcat_delete'),
+
+    # serializer_Part
+
+    path('productapi/', ProductAPIView.as_view()),
+    path('categoryapi/', CategoryAPIView.as_view()),
+    path('subcatyapi/', SubCatAPIView.as_view()),
+    path('usersapi/', UsersAPIView.as_view()),
 ]

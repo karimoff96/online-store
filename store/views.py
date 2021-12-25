@@ -33,11 +33,22 @@ def log_in(request):
 def categories(request):
     products(request)
     category = Category.objects.all()
+    print(category.get(id=2).image)
     return render(request, 'category/categories.html', {'category': category})
 
 
 def category_add(request):
-    return render(request, 'category/categories_add.html')
+    print(request.POST)
+    if request.method == "POST":
+        a = request.POST
+        category = Category.objects.create(
+            name=a['name'],
+            image=a['image'],
+            active=a['active']
+        )
+        category.save()
+        return redirect('/categories')
+    return render(request, 'category/category_add.html')
 
 
 def products(request):

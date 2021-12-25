@@ -5,7 +5,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(blank=True, null=True)
-    cr_on = models.DateTimeField(auto_created=True, blank=True, null=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
     active = models.BooleanField(default=True)
 
@@ -17,7 +17,7 @@ class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=100)
     image = models.ImageField(blank=True, null=True)
-    cr_on = models.DateTimeField(auto_created=True, blank=True, null=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
     active = models.BooleanField(default=True)
 
@@ -31,13 +31,13 @@ class Product(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=50)
-    datetime = models.DateTimeField(auto_created=True, blank=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, null=True)
     type = models.CharField(max_length=50)
     image = models.ImageField(blank=True, null=True)
     price = models.IntegerField(default=0)
-    cr_on = models.DateTimeField(auto_created=True, blank=True, null=True)
-    cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
+    cr_up = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -53,7 +53,7 @@ class Users(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     info = models.TextField(blank=True, null=True)
     language = models.CharField(max_length=30, blank=True, null=True)
-    cr_on = models.DateTimeField(auto_created=True, blank=True, null=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
     active = models.BooleanField(default=True)
 

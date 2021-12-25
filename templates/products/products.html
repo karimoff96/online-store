@@ -190,7 +190,12 @@ Website: http://www.webthemez.com/
                                             <td>{{ c.datetime }}</td>
                                             <td>{{ c.description }}</td>
                                             <td>{{ c.type }}</td>
-                                            <td><img src="{{ c.image }}"></td>
+                                            <td>
+                                                <img src="/media/{{ c.image }}"
+                                                     style="object-fit:scale-down;
+                                                    width:80px;
+                                                    height:50px"/>
+                                            </td>
                                             <td>{{ c.price }}</td>
                                             <td>{{ c.active }}</td>
                                             <td><a href="/product_edit/{{ c.id }}" class="btn btn-info">Edit</a>

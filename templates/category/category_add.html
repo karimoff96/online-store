@@ -134,7 +134,7 @@
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Forms</a></li>
-                <li class="active">Product Add</li>
+                <li class="active">Category Add</li>
             </ol>
 
         </div>
@@ -149,33 +149,6 @@
                                 static control, etc.</p>
                             <form method="POST">
                                 {% csrf_token %}
-                                <div class="row">
-                                    <a href='/category_add' class="col-2 btn btn-primary mb-2 form-group">Category add</a>
-                                        <div class="sub-title form-group">Category</div>
-                                        {% for c in categories %}
-                                            <div>
-                                                <select class="selectbox form-group" name="category">
-                                                    <optgroup label="Category">
-                                                        <option value="{{ c.id }}">{{ c.name }}</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                <a href='/subcat_add' class="col-2 btn btn-primary mb-2">SubCategory add</a>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">SubCategory</div>
-                                    {% for c in subcat %}
-                                        <div class="row">
-                                            <select class="selectbox" name="subcategory">
-                                                <optgroup label="SubCategory">
-                                                    <option value="{{ c.id }}">{{ c.name }}</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-
-                                    {% endfor %}
-                                </div>
                                 <div class="col-xs-12">
                                     <div class="sub-title">Name</div>
                                     <div>
@@ -184,65 +157,21 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="sub-title">Code</div>
-                                    <div>
-                                        <input type="text" class="form-control" name='code'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Model</div>
-                                    <div>
-                                        <input type="text" class="form-control" name='model'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="sub-title">Date</div>
-                                    <div>
-                                        <input type="date" class="form-control" name='cr_on'
-                                               placeholder="">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Description</div>
-                                    <div>
-                                        <textarea class="form-control" name='description' rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Type</div>
-                                    <div>
-                                        <input type="text" class="form-control" name='type'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
                                     <div>
                                         <div class="sub-title">Image input</div>
                                         <div class="form-group ">
-                                            <input type="file" id="exampleInputFile" name="image">
-                                            <p class="help-block">Choose an image of item</p>
+                                            <input type="file" name="image">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="sub-title">Price</div>
-                                    <div>
-                                        <input type="number" class="form-control" name='price'
-                                               placeholder="Text input">
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
                                     <div class="sub-title">Active</div>
-                                    <div>
                                         <select class="selectbox" name="active">
                                             <optgroup label="Active">
-                                                <option value="{{ True }}">{{ "Active" }}</option>
+                                                <option value="{{ True }}">{{ "Active" }}<i class="glyphicon glyphicon-ok-circle"></i></option>
                                                 <option value="{{ False }}">{{ "Inactive" }}</option>
                                             </optgroup>
                                         </select>
-                                    </div>
                                     <div class="panel-heading">
                                         <div class="card-title">
                                             <div class="title">Submit information</div>
