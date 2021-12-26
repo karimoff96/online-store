@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(upload_to='media', blank=True, null=True)
     cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
     active = models.BooleanField(default=True)
@@ -16,7 +16,7 @@ class Category(models.Model):
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=100)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(upload_to='media', blank=True, null=True)
     cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True, blank=True, null=True)
     active = models.BooleanField(default=True)
@@ -34,7 +34,7 @@ class Product(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True, null=True)
     type = models.CharField(max_length=50)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(upload_to='media', blank=True, null=True)
     price = models.IntegerField(default=0)
     cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True)
@@ -48,7 +48,7 @@ class Users(models.Model):
     username = models.CharField(max_length=30, blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30, blank=True, null=True)
-    avatar = models.ImageField(blank=True, null=True)
+    avatar = models.ImageField(upload_to='media', blank=True, null=True)
     phone_number = models.CharField(max_length=128, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
     info = models.TextField(blank=True, null=True)

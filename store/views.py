@@ -2,6 +2,7 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
+from django.core.files.storage import FileSystemStorage
 
 
 @login_required
@@ -29,20 +30,21 @@ def log_in(request):
 
 @login_required
 def categories(request):
-    products(request)
     category = Category.objects.all()
-    print(category.get(id=2).image)
     return render(request, 'category/categories.html', {'category': category})
 
 
 @login_required
 def category_add(request):
-    print(request.POST)
-    if request.method == "POST":
+    if request.method == "POST" and request.FILES['image']:
+        upload_photo = request.FILES['image']
+        fss = FileSystemStorage()
+        file = fss.save(upload_photo.name, upload_photo)
+        file_url = fss.url(file)
         a = request.POST
         category = Category.objects.create(
             name=a['name'],
-            image=a['image'],
+            image=file_url,
             active=a['active']
         )
         category.save()
@@ -59,7 +61,7 @@ def category_edit(request, id):
         category.image = a['image']
         category.active = a['active']
         category.save()
-        return redirect('/category')
+        return redirect('/categories')
     return render(request, 'category/category_edit.html', {'categories': categories, 'category': category})
 
 
@@ -77,7 +79,6 @@ def products(request):
 
 @login_required
 def product_add(request):
-    print(request.POST)
     categories = Category.objects.all()
     subcat = SubCategory.objects.all()
     if request.method == "POST":
