@@ -88,7 +88,8 @@
                 </li>
 
                 <li>
-                    <a class="active-menu" href="#"><i class="fa fa-sitemap"></i> Subcategory <span class="fa arrow"></span></a>
+                    <a class="active-menu" href="#"><i class="fa fa-sitemap"></i> Subcategory <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/subcat">All subcategories</a>
@@ -129,18 +130,17 @@
                                 static control, etc.</p>
                             <form method="POST">
                                 {% csrf_token %}
-                                <a href='/category_add' class="col-2 btn btn-primary mb-2">Category add</a>
                                 <div class="col-xs-12">
-                                    <div class="sub-title">Category</div>
-                                    {% for c in categories %}
-                                        <div>
-                                            <select class="selectbox" name="category">
-                                                <optgroup label="Category">
+                                    <div class='col-xs-3 sub-title'>Category <a href='/category_add'
+                                                                                class="col-2 btn btn-primary mb-2 form-group">Category add</a>
+                                        <select class="selectbox form-group" name="category">
+                                            <optgroup label="Category">
+                                                {% for c in category %}
                                                     <option value="{{ c.id }}">{{ c.name }}</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    {% endfor %}
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="sub-title">Name</div>

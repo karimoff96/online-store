@@ -7,7 +7,12 @@ from django.core.files.storage import FileSystemStorage
 
 @login_required
 def index(request):
-    return render(request, "index.html")
+    product = len(Product.objects.all())
+    category = len(Category.objects.all())
+    subcate = len(SubCategory.objects.all())
+    user = len(Users.objects.all())
+    return render(request, "index.html",
+                  {'product': product, 'category': category, 'subcate': subcate, 'user': user})
 
 
 @login_required

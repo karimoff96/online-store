@@ -56,7 +56,7 @@
         </ul>
     </nav>
     <!--/. NAV TOP  -->
-   <nav class="navbar-default navbar-side" role="navigation">
+    <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
 
@@ -129,20 +129,20 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="col-xs-12">
-                                    <a href='/category_add' class="col-2 btn btn-primary mb-2 form-group">Category
-                                        add</a>
-                                    <div class="sub-title form-group">Category</div>
-                                    <select class="selectbox form-group" name="category">
-                                        <optgroup label="Category">
-                                            {% for c in categories %}
-                                                <option value="{{ c.id }}">{{ c.name }}</option>
-                                            {% endfor %}
-                                        </optgroup>
-                                    </select>
+                                    <div class='col-xs-3 sub-title'>Category <a href='/category_add'
+                                                                                class="col-2 btn btn-primary mb-2 form-group">Category add</a>
+                                        <select class="selectbox form-group" name="category">
+                                            <optgroup label="Category">
+                                                {% for c in categories %}
+                                                    <option value="{{ c.id }}">{{ c.name }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <a href='/subcat_add' class="col-2 btn btn-primary mb-2">SubCategory add</a>
-                                    <div class="sub-title">SubCategory</div>
+                                    <div class='col-xs-3 sub-title'>Subcategory <a href='/subcat_add'
+                                                                                class="col-2 btn btn-primary mb-2 form-group">Subcategory add</a>
                                     <select class="selectbox" name="subcategory">
                                         <optgroup label="SubCategory">
                                             {% for c in subcat %}
@@ -151,6 +151,7 @@
                                         </optgroup>
                                     </select>
                                 </div>
+                            </div>
                                 <div class="col-xs-12">
                                     <div class="sub-title">Name</div>
                                     <div>
