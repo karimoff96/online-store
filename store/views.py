@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from .forms import UserForm, UserRegistrationForm
 
 
 @login_required
@@ -15,9 +18,9 @@ def index(request):
                   {'product': product, 'category': category, 'subcate': subcate, 'user': user})
 
 
-@login_required
 def log_in(request):
     if request.method == "POST":
+        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(
@@ -33,13 +36,11 @@ def log_in(request):
         return render(request, 'login.html')
 
 
-@login_required
 def categories(request):
     category = Category.objects.all()
     return render(request, 'category/categories.html', {'category': category})
 
 
-@login_required
 def category_add(request):
     if request.method == "POST" and request.FILES['image']:
         upload_photo = request.FILES['image']
@@ -76,13 +77,11 @@ def category_delete(request, id):
     return redirect('/categories')
 
 
-@login_required
 def products(request):
     products = Product.objects.all()
     return render(request, 'products/products.html', {'products': products})
 
 
-@login_required
 def product_add(request):
     categories = Category.objects.all()
     subcat = SubCategory.objects.all()
@@ -104,7 +103,6 @@ def product_add(request):
     return render(request, 'products/products_add.html', {'categories': categories, 'subcat': subcat})
 
 
-@login_required
 def product_edit(request, id):
     products = Product.objects.all()
     product = Product.objects.get(id=id)
@@ -124,20 +122,17 @@ def product_edit(request, id):
     return render(request, "products/products_edit.html", {"products": products, "product": product})
 
 
-@login_required
 def product_delete(request, id):
     product = Product.objects.get(id=id)
     product.delete()
     return redirect('/products')
 
 
-@login_required
 def subcategory(request):
     subcat = SubCategory.objects.all()
     return render(request, 'subcategory/subcategory.html', {'subcat': subcat})
 
 
-@login_required
 def subcat_add(request):
     category = Category.objects.all()
     if request.method == 'POST':
@@ -153,7 +148,6 @@ def subcat_add(request):
     return render(request, 'subcategory/subcategory_add.html', {'category': category})
 
 
-@login_required
 def subcat_edit(request, id):
     subcats = SubCategory.objects.all()
     subcate = SubCategory.objects.get(id=id)
@@ -168,7 +162,6 @@ def subcat_edit(request, id):
     return render(request, "subcategory/subcategory_edit.html", {"subcats": subcats, "subcate": subcate})
 
 
-@login_required
 def subcat_delete(request, id):
     subcat = SubCategory.objects.get(id=id)
     subcat.delete()
