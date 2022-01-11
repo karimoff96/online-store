@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8"/>
+   <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="" name="description"/>
     <meta content="webthemez" name="author"/>
@@ -74,7 +74,12 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="active-menu" href="#"><i class="fa fa-sitemap"></i> Category <span
+                    <a id="categories" href="#"><i class="fa fa-sitemap"></i> Category
+                          <script>
+                            if (window.location.pathname == '/categories/')
+                                document.getElementById('categories').className = "active-menu"
+                        </script>
+                        <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -103,6 +108,7 @@
         </div>
     </nav>
     <!-- /. NAV SIDE  -->
+
     <div id="page-wrapper">
         <div class="header">
             <h1 class="page-header">
@@ -144,7 +150,7 @@
                                             <td>{{ c.id }}</td>
                                             <td>{{ c.name }}</td>
                                             <td>
-                                                <img src="/media/{{ c.image }}"
+                                                <img src="{{ c.image }}"
                                                      style="object-fit:scale-down;
                                                     width:80px;
                                                     height:50px"/>
@@ -219,16 +225,12 @@
     </div>
     <!-- /. PAGE INNER  -->
 </div>
-<!-- /. PAGE WRAPPER  -->
-<!-- /. WRAPPER  -->
-<!-- JS Scripts-->
-<!-- jQuery Js -->
+
 <script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
 <!-- Bootstrap Js -->
 <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 <!-- Metis Menu Js -->
-<script src="{% static 'assets/js/morris/raphael-2.1.0.min.js' %}"></script>
-<script src="{% static 'assets/js/morris/morris.js' %}"></script>
+<script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
 <!-- DATA TABLE SCRIPTS -->
 <script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
 <script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>

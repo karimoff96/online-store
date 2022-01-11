@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .forms import UserForm, UserRegistrationForm
+from django.urls import resolve
 
 
 @login_required
@@ -38,7 +39,7 @@ def log_in(request):
 
 def categories(request):
     category = Category.objects.all()
-    return render(request, 'category/categories.html', {'category': category})
+    return render(request, 'category/categories.html', {'category': category, 'request': request})
 
 
 def category_add(request):
