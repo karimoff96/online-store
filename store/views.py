@@ -1,12 +1,8 @@
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
-from django.contrib.auth.models import User
-from django.http import HttpResponse
-from .forms import UserForm, UserRegistrationForm
-from django.urls import resolve
 
 
 @login_required
@@ -21,7 +17,6 @@ def index(request):
 
 def log_in(request):
     if request.method == "POST":
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(
@@ -35,6 +30,11 @@ def log_in(request):
         return redirect('/index')
     else:
         return render(request, 'login.html')
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 def categories(request):
@@ -62,12 +62,21 @@ def category_add(request):
 def category_edit(request, id):
     categories = Category.objects.all()
     category = Category.objects.get(id=id)
-    if request.method == 'POST':
+    if request.method == "POST":
         a = request.POST
-        category.name = a['name']
-        category.image = a['image']
-        category.active = a['active']
-        category.save()
+        try:
+            upload_photo = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(upload_photo.name, upload_photo)
+            file_url = fss.url(file)
+            category.name = a['name']
+            category.image = file_url
+            category.active = a['active']
+            category.save()
+        except:
+            category.name = a['name']
+            category.active = a['active']
+            category.save()
         return redirect('/categories')
     return render(request, 'category/category_edit.html', {'categories': categories, 'category': category})
 
@@ -86,16 +95,19 @@ def products(request):
 def product_add(request):
     categories = Category.objects.all()
     subcat = SubCategory.objects.all()
-    if request.method == "POST":
+    if request.method == "POST" and request.FILES['image']:
+        upload_photo = request.FILES['image']
+        fss = FileSystemStorage()
+        file = fss.save(upload_photo.name, upload_photo)
+        file_url = fss.url(file)
         a = request.POST
         product = Product.objects.create(
             name=a['name'],
             code=a['code'],
             model=a['model'],
-            datetime=a['cr_on'],
             description=a['description'],
             type=a['type'],
-            image=a['image'],
+            image=file_url,
             price=a['price'],
             active=a['active']
         )
@@ -107,18 +119,31 @@ def product_add(request):
 def product_edit(request, id):
     products = Product.objects.all()
     product = Product.objects.get(id=id)
-    if request.method == 'POST':
+    if request.method == "POST":
         a = request.POST
-        product.name = a['name']
-        product.code = a['code']
-        product.model = a['model']
-        product.datetime = a['cr_on']
-        product.description = a['description']
-        product.type = a['type']
-        product.image = a['image']
-        product.price = a['price']
-        product.active = a['active']
-        product.save()
+        try:
+            upload_photo = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(upload_photo.name, upload_photo)
+            file_url = fss.url(file)
+            product.name = a['name']
+            product.code = a['code']
+            product.model = a['model']
+            product.image = file_url
+            product.description = a['description']
+            product.type = a['type']
+            product.price = a['price']
+            product.active = a['active']
+            product.save()
+        except:
+            product.name = a['name']
+            product.code = a['code']
+            product.model = a['model']
+            product.description = a['description']
+            product.type = a['type']
+            product.price = a['price']
+            product.active = a['active']
+            product.save()
         return redirect('/products')
     return render(request, "products/products_edit.html", {"products": products, "product": product})
 
@@ -136,12 +161,15 @@ def subcategory(request):
 
 def subcat_add(request):
     category = Category.objects.all()
-    if request.method == 'POST':
+    if request.method == "POST" and request.FILES['image']:
+        upload_photo = request.FILES['image']
+        fss = FileSystemStorage()
+        file = fss.save(upload_photo.name, upload_photo)
+        file_url = fss.url(file)
         a = request.POST
         subcat = SubCategory.objects.create(
             name=a['name'],
-            cr_on=a['cr_on'],
-            image=a['image'],
+            image=file_url,
             active=a['active']
         )
         subcat.save()
@@ -152,13 +180,21 @@ def subcat_add(request):
 def subcat_edit(request, id):
     subcats = SubCategory.objects.all()
     subcate = SubCategory.objects.get(id=id)
-    if request.method == 'POST':
+    if request.method == "POST":
         a = request.POST
-        subcate.name = a['name']
-        subcate.cr_on = a['cr_on']
-        subcate.image = a['image']
-        subcate.active = a['active']
-        subcate.save()
+        try:
+            upload_photo = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(upload_photo.name, upload_photo)
+            file_url = fss.url(file)
+            subcate.name = a['name']
+            subcate.image = file_url
+            subcate.active = a['active']
+            subcate.save()
+        except:
+            subcate.name = a['name']
+            subcate.active = a['active']
+            subcate.save()
         return redirect('/subcat')
     return render(request, "subcategory/subcategory_edit.html", {"subcats": subcats, "subcate": subcate})
 

@@ -1,9 +1,11 @@
 from django.urls import path
 from .views import *
 from .serializerviews import *
+from . import views
 
 urlpatterns = [
     path('', log_in, name='login'),
+    path('logout/', views.user_logout, name='logout'),
     path('index/', index, name='index'),
     path('categories/', categories, name='categories'),
     path('category_add/', category_add, name='category_add'),

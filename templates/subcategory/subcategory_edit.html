@@ -36,23 +36,7 @@
         </div>
 
         <ul class="nav navbar-top-links navbar-right">
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
+            <li><a href="/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
         </ul>
     </nav>
     <!--/. NAV TOP  -->
@@ -125,7 +109,7 @@
                             <p>Examples of standard form controls. such as input, textarea, select, checkboxes and
                                 radios ,
                                 static control, etc.</p>
-                            <form method="POST">
+                            <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <a href='/category_add' class="col-2 btn btn-primary mb-2">Category add</a>
                                 <div class="col-xs-12">
@@ -147,19 +131,11 @@
                                                placeholder="Text input">
                                     </div>
                                 </div>
-                                <div class="col-xs-2">
-                                    <div class="sub-title">Date</div>
-                                    <div>
-                                        <input type="date" class="form-control" value= "{{ subcate.cr_on }}" name='cr_on'
-                                               placeholder="">
-                                    </div>
-                                </div>
                                 <div class="col-xs-12">
                                     <div>
                                         <div class="sub-title">Image input</div>
                                         <div class="form-group ">
-                                            <input type="file" id="exampleInputFile" value= "{{ subcate.image }}" name="image">
-                                            <p class="help-block">Choose an image of item</p>
+                                            <input type="file" name="image">
                                         </div>
                                     </div>
                                 </div>
