@@ -101,7 +101,9 @@ def product_add(request):
         file = fss.save(upload_photo.name, upload_photo)
         file_url = fss.url(file)
         a = request.POST
+        sub_category = SubCategory.objects.get(id=a['subcategory'])
         product = Product.objects.create(
+            subcategory=sub_category,
             name=a['name'],
             code=a['code'],
             model=a['model'],
@@ -117,15 +119,20 @@ def product_add(request):
 
 
 def product_edit(request, id):
+    print(request.POST)
+    subcat = SubCategory.objects.all()
+    categories = Category.objects.all()
     products = Product.objects.all()
     product = Product.objects.get(id=id)
     if request.method == "POST":
         a = request.POST
+        scat = SubCategory.objects.get(id=a['subcategory'])
         try:
             upload_photo = request.FILES['image']
             fss = FileSystemStorage()
             file = fss.save(upload_photo.name, upload_photo)
             file_url = fss.url(file)
+            product.subcategory = scat
             product.name = a['name']
             product.code = a['code']
             product.model = a['model']
@@ -136,6 +143,8 @@ def product_edit(request, id):
             product.active = a['active']
             product.save()
         except:
+
+            product.subcategory = scat
             product.name = a['name']
             product.code = a['code']
             product.model = a['model']
@@ -145,7 +154,8 @@ def product_edit(request, id):
             product.active = a['active']
             product.save()
         return redirect('/products')
-    return render(request, "products/products_edit.html", {"products": products, "product": product})
+    return render(request, "products/products_edit.html",
+                  {"products": products, "product": product, 'categories': categories, 'subcat': subcat})
 
 
 def product_delete(request, id):
@@ -155,11 +165,13 @@ def product_delete(request, id):
 
 
 def subcategory(request):
+    cat = Category.objects.all()
     subcat = SubCategory.objects.all()
-    return render(request, 'subcategory/subcategory.html', {'subcat': subcat})
+    return render(request, 'subcategory/subcategory.html', {'subcat': subcat, 'cat': cat})
 
 
 def subcat_add(request):
+    print(request.POST)
     category = Category.objects.all()
     if request.method == "POST" and request.FILES['image']:
         upload_photo = request.FILES['image']
@@ -167,7 +179,9 @@ def subcat_add(request):
         file = fss.save(upload_photo.name, upload_photo)
         file_url = fss.url(file)
         a = request.POST
+        cat = Category.objects.get(id=a['category'])
         subcat = SubCategory.objects.create(
+            category=cat,
             name=a['name'],
             image=file_url,
             active=a['active']
@@ -178,25 +192,28 @@ def subcat_add(request):
 
 
 def subcat_edit(request, id):
-    subcats = SubCategory.objects.all()
+    category = Category.objects.all()
     subcate = SubCategory.objects.get(id=id)
     if request.method == "POST":
         a = request.POST
+        cat = Category.objects.get(id=a['category'])
         try:
             upload_photo = request.FILES['image']
             fss = FileSystemStorage()
             file = fss.save(upload_photo.name, upload_photo)
             file_url = fss.url(file)
+            subcate.category = cat
             subcate.name = a['name']
             subcate.image = file_url
             subcate.active = a['active']
             subcate.save()
         except:
+            subcate.category = cat
             subcate.name = a['name']
             subcate.active = a['active']
             subcate.save()
         return redirect('/subcat')
-    return render(request, "subcategory/subcategory_edit.html", {"subcats": subcats, "subcate": subcate})
+    return render(request, "subcategory/subcategory_edit.html", {"category": category, "subcate": subcate})
 
 
 def subcat_delete(request, id):

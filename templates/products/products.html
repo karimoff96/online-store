@@ -118,7 +118,6 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Image</th>
-                                        <th>Category</th>
                                         <th>SubCategory</th>
                                         <th>Code</th>
                                         <th>Model</th>
@@ -142,8 +141,7 @@
                                                     width:80px;
                                                     height:50px"/>
                                             </td>
-                                            <td>{{ c.category }}</td>
-                                            <td>{{ c.subcategory }}</td>
+                                            <td>{{ c.subcategory.name }}</td>
                                             <td>{{ c.code }}</td>
                                             <td>{{ c.model }}</td>
                                             <td>{{ c.type }}</td>

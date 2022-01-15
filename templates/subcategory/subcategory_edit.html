@@ -72,7 +72,8 @@
                 </li>
 
                 <li>
-                    <a class="active-menu" href="#"><i class="fa fa-sitemap"></i> Subcategory <span class="fa arrow"></span></a>
+                    <a class="active-menu" href="#"><i class="fa fa-sitemap"></i> Subcategory <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/subcat">All subcategories</a>
@@ -107,27 +108,24 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>Examples of standard form controls. such as input, textarea, select, checkboxes and
-                                radios ,
-                                static control, etc.</p>
+                                radios , static control, etc.</p>
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <a href='/category_add' class="col-2 btn btn-primary mb-2">Category add</a>
-                                <div class="col-xs-12">
-                                    <div class="sub-title">Category</div>
-                                    {% for c in categories %}
-                                        <div>
-                                            <select class="selectbox" name="category">
-                                                <optgroup label="Category">
+                                <a href='/category_add' class="col-3 btn btn-primary mb-3 form-group">Category
+                                    add</a>
+                                <div class="sub-title">Category
+                                        <select class="col-xs-6 selectbox form-group" name="category">
+                                            <optgroup label="Category">
+                                                {% for c in category %}
                                                     <option value="{{ c.id }}">{{ c.name }}</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    {% endfor %}
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="sub-title">Name</div>
                                     <div>
-                                        <input type="text" class="form-control" value= "{{ subcate.name }}" name='name'
+                                        <input type="text" class="form-control" value="{{ subcate.name }}" name='name'
                                                placeholder="Text input">
                                     </div>
                                 </div>

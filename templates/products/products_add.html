@@ -112,22 +112,10 @@
                                 radios , static control, etc.</p>
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <div class="col-xs-12">
-                                    <div class='col-xs-3 sub-title'>Category <a href='/category_add'
-                                                                                class="col-2 btn btn-primary mb-2 form-group">Category add</a>
-                                        <select class="selectbox form-group" name="category">
-                                            <optgroup label="Category">
-                                                {% for c in categories %}
-                                                    <option value="{{ c.id }}">{{ c.name }}</option>
-                                                {% endfor %}
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class='col-xs-3 sub-title'>Subcategory <a href='/subcat_add'
-                                                                                class="col-2 btn btn-primary mb-2 form-group">Subcategory add</a>
-                                    <select class="selectbox" name="subcategory">
+                                <a href='/subcat_add' class="col-3 btn btn-primary mb-3 form-group">SubCategory
+                                    add</a>
+                                <div class='sub-title'>SubCategory
+                                    <select class="col-xs-8 selectbox" name="subcategory">
                                         <optgroup label="SubCategory">
                                             {% for c in subcat %}
                                                 <option value="{{ c.id }}">{{ c.name }}</option>
@@ -135,7 +123,7 @@
                                         </optgroup>
                                     </select>
                                 </div>
-                            </div>
+
                                 <div class="col-xs-12">
                                     <div class="sub-title">Name</div>
                                     <div>
@@ -157,7 +145,7 @@
                                                placeholder="Text input">
                                     </div>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-8">
                                     <div class="sub-title">Description</div>
                                     <div>
                                         <textarea class="form-control" name='description' rows="3"></textarea>
@@ -208,14 +196,15 @@
                         </div>
                     </div>
                 </div>
-
-                <footer><p> Online store <a href="http://t.me/dkarimoff96">Created by</a></p></footer>
-                </footer>
             </div>
-            <!-- /. PAGE INNER  -->
+
+            <footer><p> Online store <a href="http://t.me/dkarimoff96">Created by</a></p></footer>
+            </footer>
         </div>
-        <!-- /. PAGE WRAPPER  -->
+        <!-- /. PAGE INNER  -->
     </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
 </div>
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
