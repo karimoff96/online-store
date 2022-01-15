@@ -36,7 +36,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     type = models.CharField(max_length=50)
     image = models.ImageField(upload_to='media', blank=True, null=True)
-    price = models.IntegerField(default=0)
+    price = models.IntegerField(default=0, blank=True, null=True)
     cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
