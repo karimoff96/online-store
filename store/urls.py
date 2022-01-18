@@ -1,10 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from .serializerviews import *
 from . import views
+from rest_framework import routers
+
+app_name = 'Home'
+
+router = routers.DefaultRouter()
+router.register('productapi', viewset=ProductAPIView)
+router.register('categoryapi', viewset=CategoryAPIView)
+router.register('subcategoryapi', viewset=SubCatAPIView)
+router.register('userapi', viewset=UsersAPIView)
 
 urlpatterns = [
     path('', log_in, name='login'),
+    path('api/', include(router.urls)),
     path('logout/', views.user_logout, name='logout'),
     path('index/', index, name='index'),
     path('categories/', categories, name='categories'),
@@ -18,12 +28,12 @@ urlpatterns = [
     path('subcat/', subcategory, name='subcat'),
     path('subcat_add/', subcat_add, name='subcat_add'),
     path('subcat_edit/<int:id>', subcat_edit, name='subcat_edit'),
-    path('subcat_delete/<int:id>', subcat_delete, name='subcat_delete'),
+    path('subcat_delete/<int:id>', subcat_delete, name='subcat_delete')
 
     # serializer_Part
-
-    path('productapi/', ProductAPIView.as_view()),
-    path('categoryapi/', CategoryAPIView.as_view()),
-    path('subcatyapi/', SubCatAPIView.as_view()),
-    path('usersapi/', UsersAPIView.as_view()),
+#
+#     path('productapi/', ProductAPIView.as_view()),
+#     path('categoryapi/', CategoryAPIView.as_view()),
+#     path('subcatyapi/', SubCatAPIView.as_view()),
+#     path('usersapi/', UsersAPIView.as_view()),
 ]
